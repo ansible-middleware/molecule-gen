@@ -102,11 +102,12 @@ def analyze_gaps(ctx: CollectionContext) -> list[GapItem]:
             name_covered = any(suffix in s for s in all_scenario_names)
 
             if not already_set and not name_covered:
+                description = " ".join(var.description.split())
                 gaps.append(GapItem(
                     role=role.name,
                     type=GapType.FLAG_NEVER_TOGGLED,
                     reason=(
-                        f"Variable '{var.name}' ({var.description}) "
+                        f"Variable '{var.name}' ({description}) "
                         "is declared in argument_specs but never set to a "
                         "non-default value in any scenario."
                     ),
